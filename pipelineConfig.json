@@ -1,0 +1,6 @@
+{
+ "type" : "app",
+ "domains": ["CORE"],
+ "checkmarx": { "enabled": true },
+ "scrumTeam": "CIQ-ObjectScale" 
+}

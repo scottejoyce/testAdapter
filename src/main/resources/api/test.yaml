@@ -1,0 +1,170 @@
+---
+swagger: '2.0'
+tags:
+  - name: Test System
+    description: APIs for Test details adapter
+    
+paths:
+
+  /api/system/{id}/summary:
+    get:
+      summary: Get symmary data for the test system details view.
+      description: Returns summary information for the test system details page.
+      tags:
+        - Test System
+      operationId: getTestSystemSummaryData
+      parameters:
+        - $ref: '#/parameters/id'
+        - $ref: '#/parameters/tenant'
+        - $ref: '#/parameters/accept-language'
+      responses:
+        200:
+          description: Success
+          schema:
+            $ref: '#/definitions/TestSystemSummaryResponse'
+        401:
+          $ref: '#/responses/AuthenticationError'
+        403:
+          $ref: '#/responses/AuthorizationError'
+        404:
+          $ref: '#/responses/NotFoundError'
+        422:
+          $ref: '#/responses/ParamError'
+        500:
+          $ref: '#/responses/UnexpectedError'
+          
+  /api/system/{id}/configuration/properties:
+    get:
+      summary: Get inventory properties data for Test system details view
+      description: Returns inventory details for Test system
+      tags:
+        - Test System
+      operationId: getTestSystemConfigurationData
+      parameters:
+        - $ref: '#/parameters/id'
+        - $ref: '#/parameters/tenant'
+        - $ref: '#/parameters/accept-language'
+      responses:
+        200:
+          description: Success
+          schema:
+            $ref: '#/definitions/TestSystemConfigurationResponse'
+        401:
+          $ref: '#/responses/AuthenticationError'
+        403:
+          $ref: '#/responses/AuthorizationError'
+        404:
+          $ref: '#/responses/NotFoundError'
+        422:
+          $ref: '#/responses/ParamError'
+        500:
+          $ref: '#/responses/UnexpectedError'  
+                                
+definitions:
+  testSystemSummaryResponse:
+    required:
+      - id
+      - systemName
+      - model
+      - serialNumber
+    properties:
+      id:
+        description: Unique identifier for test storage system
+        type: string
+      systemName:
+        description: Name of the test system
+        type: string
+      model:
+        description: Model of the test system
+        type: string
+      serialNumber: 
+        description: Serial number of test system
+        type: string
+    example:
+      id: test-ELMOBJ05229MMY
+      systemName: test-ELMOBJ05229MMY
+      model: test
+      serialNumber: ELMOBJ05229MMY
+      
+  testSystemConfigurationResponse:
+    required:
+      - id
+      - systemName
+      - model
+      - serialNumber
+      - siteId
+      - site
+      - location
+      - lastContactTime
+      - numberOfStoragePods
+      - platform
+      - version
+      - contractExpirationDate
+      - contractNumber
+      - contractCoverageType
+    properties:
+      id:
+        description: Unique identifier for test storage system
+        type: string
+      systemName:
+        description: Name of the test system
+        type: string
+      model:
+        description: Model of the test system
+        type: string
+      serialNumber: 
+        description: Serial number of test system
+        type: string
+      siteId: 
+        description: Site identifier for test storage system
+        type: string
+      site: 
+        description: Site name of the test system
+        type: string
+      location: 
+        description: Location of the test system
+        type: string
+      lastContactTime: 
+        description: Last contact time for test system
+        $ref: '#/definitions/LocalizedTimestamp'
+      numberOfStoragePods: 
+        description: Number of storage pods for the test system
+        type: integer
+        format: int64
+      platform: 
+        description: Platform on which test system is being deployed
+        type: string
+      version: 
+        description: Version of the test storage system
+        type: string
+      contractExpirationDate: 
+        description: License expiration date for the test system
+        $ref: '#/definitions/LocalizedDate'
+      contractNumber: 
+        description: License id of the test system
+        type: string
+      contractCoverageType: 
+        description: License type of test system
+        type: string  
+    example:
+      id: test-ELMOBJ05229MMY
+      systemName: test-ELMOBJ05229MMY
+      model: test
+      serialNumber: ELMOBJ05229MMY
+      siteId: 11145366
+      site: CIQ Engineering Site
+      location: Hopkinton, MA
+      lastContactTime: 
+        raw: 1654088443015
+        text: Wed, Jun 1 2022, 1:00:43 PM UTC
+      numberOfStoragePods: 
+        raw: 3
+        text: 3
+      platform: VMware 
+      version: 1.1.0-1783
+      contractExpirationDate:
+        raw: 540228229
+        text: Oct 22, 2022 
+      contractNumber: ELMOBJ10215GLR 
+      contractCoverageType: PERMANENT
+        
